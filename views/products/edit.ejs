@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Product</title>
+</head>
+
+<body>
+    <h1>Add a Product</h1>
+    <!--method override-->
+    <form action="/products/<%=foundProduct._id%>?_method=PUT" method="POST">
+        <label for="name">Product Name</label>
+        <input type="text" name="name" id="name" placeholder="product name" value="<%=foundProduct.name%>">
+        <label for="price">Price (Unit)</label>
+        <input type="text" name="price" id="price" placeholder="price" value="<%=foundProduct.price%>">
+        <label for="categories">Select Category</label>
+
+        <!--the name, id, must match with the name in schema if you didn't use let to rename-->
+        <select type="text" name="categories" id="categories">
+            <!--In selection: value=foundProduct.price doesn't show the current category, 
+            we can add conditional statements for each option or make a loop-->
+            <!-- <option value="fruit" <=foundProduct.categories==='fruit' ?'selected':''%>>fruit
+            </option>
+            <option value="vegetable" <=foundProduct.categories==='vegetable' ? 'selected' :''%>>vegetable
+            </option>
+            <option value="dairy" <=foundProduct.categories==='dairy' ?'selected':''%>>dairy
+            </option> -->
+            <%for(let category of categories) {%>
+                <option value="<%=category%>" <%=foundProduct.categories===category ?'selected':''%>>
+                    <%=category%>
+                </option>
+                <%}%>
+        </select>
+        <!--in index.js add a app.post() method for submit button-->
+        <button type="submit">Submit</button>
+    </form>
+    <a href="/products/<%=foundProduct._id%>">Cancel</a>
+</body>
+
+</html>
